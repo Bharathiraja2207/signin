@@ -27,7 +27,7 @@ await client.connect();
 
   
 app.get("/", function (request, response) {
-  response.send("🙋‍♂️,hello.. 🌏 🎊✨🤩");
+  response.send("🙋‍♂️,hello..worlds 🌏 🎊✨🤩");
 });
 
           
