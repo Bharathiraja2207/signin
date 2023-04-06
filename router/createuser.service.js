@@ -18,3 +18,12 @@ export async function getuserbyname(username, hashpassword) {
         username: username
       });
   }
+
+  export async function createmovie(username, hashpassword) {
+    return await client
+      .db("movie")
+      .collection("signup")
+      .find({
+        username: username
+      });
+  }
