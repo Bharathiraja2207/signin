@@ -1,29 +1,24 @@
 import { client } from '../index.js';
 
-export async function hashpass(username, hashpassword) {
+export async function hashpass(email,firstname,lastname,username, hashpassword) {
   return await client
-    .db("signup")
-    .collection("signup")
+    .db("forgetpassword")
+    .collection("forgetpassword")
     .insertOne({
+      firstname:firstname,
+      lastname:lastname,
       username: username,
-      password: hashpassword
+      password: hashpassword ,
+      email:email
     });
 }
 
 export async function getuserbyname(username, hashpassword) {
     return await client
-      .db("signup")
-      .collection("signup")
+      .db("forgetpassword")
+      .collection("forgetpassword")
       .findOne({
         username: username
       });
   }
 
-  export async function createmovie(username, hashpassword) {
-    return await client
-      .db("movie")
-      .collection("signup")
-      .find({
-        username: username
-      });
-  }

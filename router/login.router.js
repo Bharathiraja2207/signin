@@ -18,7 +18,7 @@ export async function genhashpassword(password){
 //   genhashpassword("password@123")
 
 router.post("/signup",async function (request, response) {
-    const {username,password}=request.body;
+    const {email,firstname,lastname,username,password}=request.body;
 
     const userfromdb=await getuserbyname(username)
 
@@ -36,7 +36,7 @@ router.post("/signup",async function (request, response) {
         // console.log(data);
     
     // db.userid.insertmany(data)
-         const result= await hashpass(username, hashpassword)
+         const result= await hashpass(email,firstname,lastname,username, hashpassword)
         response.send(result);
     }
    

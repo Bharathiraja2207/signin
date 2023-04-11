@@ -11,9 +11,9 @@ router.post('/reset-password', async (req, res) => {
     try {
       // Check if user exists
       const user = await client
-      .db("signup")
-      .collection("signup")
-      .findOne({username:email });
+      .db("forgetpassword")
+      .collection("forgetpassword")
+      .findOne({email:email });
       if (!user) {
         return res.status(400).json({ message: 'User does not exist' });
       }
@@ -23,9 +23,9 @@ router.post('/reset-password', async (req, res) => {
   
       // Save OTP to database
       const users = await client
-      .db("signup")
-      .collection("signup")
-      .updateOne( {username: email}, { $set: { otp:otp} })
+      .db("forgetpassword")
+      .collection("forgetpassword")
+      .updateOne( {email: email}, { $set: { otp:otp} })
 
       // Send OTP to user's email
       const transporter = nodemailer.createTransport({
@@ -62,9 +62,9 @@ router.post('/reset-password', async (req, res) => {
     try {
       // Verify OTP
       const user =  await client
-      .db("signup")
-      .collection("signup")
-      .findOne({username:email })
+      .db("forgetpassword")
+      .collection("forgetpassword")
+      .findOne({email:email })
       if (!user) {
         return res.status(400).json({ message: 'User does not exist' });
       }
@@ -77,9 +77,9 @@ router.post('/reset-password', async (req, res) => {
       // Update password and OTP
       const hashpassword = await genhashpassword(password)
       const users = await client
-      .db("signup")
-      .collection("signup")
-      .updateOne({username: email}, { $set: { password:hashpassword,otp:''} })
+      .db("forgetpassword")
+      .collection("forgetpassword")
+      .updateOne({email: email}, { $set: { password:hashpassword,otp:''} })
   
       res.json({ message: 'Password updated successfully' });
     }  catch (error) {
